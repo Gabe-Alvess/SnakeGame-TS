@@ -12,23 +12,24 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #219897;
+  background: #222831;
   font-family: "Open Sans", sans-serif;
 }
 
 .title {
   padding: 20px;
-  color: #eeeeee;
+  font-size: 50px;
+  color: #4ef037;
 }
 
 .wrapper {
   width: 80vmin;
   height: 80vmin;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #293447;
+  background-color: #233142;
 }
 
 .game-details {
@@ -45,11 +46,11 @@
   height: 100%;
   display: grid;
   grid-template: repeat(30, 1fr) / repeat(30, 1fr);
-  background-color: #212837;
+  background-color: #255965;
 }
 
 .snake {
-  background-color: #60cbff;
+  background-color: #4ef037;
 }
 
 .food {
