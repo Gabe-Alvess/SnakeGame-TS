@@ -2,16 +2,16 @@ let inputDirection = { x: 0, y: 0 };
 
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
-    case "arrowUp":
+    case "ArrowUp":
       inputDirection = { x: 0, y: -1 };
       break;
-    case "arrowUDown":
+    case "ArrowDown":
       inputDirection = { x: 0, y: 1 };
       break;
-    case "arrowLeft":
+    case "ArrowLeft":
       inputDirection = { x: -1, y: 0 };
       break;
-    case "arrowRight":
+    case "ArrowRight":
       inputDirection = { x: 1, y: 0 };
       break;
   }
