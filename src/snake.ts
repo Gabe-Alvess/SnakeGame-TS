@@ -2,7 +2,7 @@ import { getInputDirection } from "./input.js";
 
 export const SNAKE_SPEED: number = 1;
 
-const snakeBody: { x: string; y: string }[] = [{ x: "11", y: "11" }];
+const snakeBody = [{ x: "12", y: "11" }];
 
 export function update() {
   const inputDirection = getInputDirection();
@@ -19,11 +19,11 @@ export function draw(gameBoard: HTMLElement): void {
   snakeBody.forEach((segment) => {
     const snakeElement = document.createElement("div");
 
-    snakeElement.style.gridRowStart = segment.y;
-    snakeElement.style.gridColumnStart = segment.x;
+    snakeElement.style.gridRowStart = "1" //segment.y; Hier ziet het probleem 
+    snakeElement.style.gridColumnStart = "1" //segment.x; Hier ziet het probleem
 
     snakeElement.classList.add("snake");
 
-    gameBoard.appendChild(snakeElement);
+    gameBoard.append(snakeElement);
   });
 }
