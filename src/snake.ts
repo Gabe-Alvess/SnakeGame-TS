@@ -2,7 +2,7 @@ import { getInputDirection } from "./input.js";
 
 export const SNAKE_SPEED: number = 6;
 
-const snakeBody = [{ x: 11, y: 11 }];
+const snake = [{ x: 15, y: 15 }];
 
 let newSegments = 0;
 
@@ -11,24 +11,46 @@ export function update() {
 
   const inputDirection = getInputDirection();
 
-  for (let i = snakeBody.length - 2; i >= 0; i--) {
-    snakeBody[i + 1] = { ...snakeBody[i] };
+  for (let i = snake.length - 2; i >= 0; i--) {
+    snake[i + 1] = { ...snake[i] };
   }
 
-  snakeBody[0].x += inputDirection.x;
-  snakeBody[0].y += inputDirection.y;
+  snake[0].x += inputDirection.x;
+  snake[0].y += inputDirection.y;
 }
 
 export function draw(gameBoard: HTMLElement): void {
-  snakeBody.forEach((segment) => {
-    const snake = document.createElement("div");
+  snake.forEach((segment) => {
+    if (segment.x === getSnakeHead().x && segment.y === getSnakeHead().y) {
+      const snakeHead = document.createElement("div");
 
-    snake.classList.add("snake");
+      snakeHead.className = "snake";
+      snakeHead.id = "head";
 
-    snake.style.gridRowStart = `${segment.y}`;
-    snake.style.gridColumnStart = `${segment.x}`;
+      snakeHead.style.gridRowStart = `${segment.y}`;
+      snakeHead.style.gridColumnStart = `${segment.x}`;
 
-    gameBoard.appendChild(snake);
+      gameBoard.appendChild(snakeHead);
+    } else if (segment.x === snake[snake.length - 1].x && segment.y === snake[snake.length - 1].y) {
+      const snakeTail = document.createElement("div");
+
+      snakeTail.className = "snake";
+      snakeTail.id = "tail";
+
+      snakeTail.style.gridRowStart = `${segment.y}`;
+      snakeTail.style.gridColumnStart = `${segment.x}`;
+
+      gameBoard.appendChild(snakeTail);
+    } else {
+      const snakeBody = document.createElement("div");
+
+      snakeBody.className = "snake";
+
+      snakeBody.style.gridRowStart = `${segment.y}`;
+      snakeBody.style.gridColumnStart = `${segment.x}`;
+
+      gameBoard.appendChild(snakeBody);
+    }
   });
 }
 
@@ -37,18 +59,18 @@ export function expandSnake(amount: number) {
 }
 
 export function onSnake(position: { x: number; y: number }, ignoreHead: boolean = false) {
-  return snakeBody.some((segment, index) => {
+  return snake.some((segment, index) => {
     if (ignoreHead && index === 0) return false;
     return equalPositions(segment, position);
   });
 }
 
 export function getSnakeHead() {
-  return snakeBody[0];
+  return snake[0];
 }
 
 export function snakeHitTail() {
-  return onSnake(snakeBody[0], true);
+  return onSnake(snake[0], true);
 }
 
 function equalPositions(pos1: { x: number; y: number }, pos2: { x: number; y: number }) {
@@ -57,7 +79,7 @@ function equalPositions(pos1: { x: number; y: number }, pos2: { x: number; y: nu
 
 function addSegments() {
   for (let i = 0; i < newSegments; i++) {
-    snakeBody.push({ ...snakeBody[snakeBody.length - 1] });
+    snake.push({ ...snake[snake.length - 1] });
   }
 
   newSegments = 0;
