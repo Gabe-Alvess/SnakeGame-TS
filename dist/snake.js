@@ -15,23 +15,14 @@ export function draw(gameBoard) {
     snake.forEach((segment) => {
         if (segment.x === getSnakeHead().x && segment.y === getSnakeHead().y) {
             const snakeHead = document.createElement("div");
-            snakeHead.className = "snake";
+            snakeHead.className = "snake-head";
             snakeHead.style.gridRowStart = `${segment.y}`;
             snakeHead.style.gridColumnStart = `${segment.x}`;
-            snakeHead.style.borderRadius = getHeadRadius() || "15px";
             gameBoard.appendChild(snakeHead);
-        }
-        else if (segment.x === snake[snake.length - 1].x && segment.y === snake[snake.length - 1].y) {
-            const snakeTail = document.createElement("div");
-            snakeTail.className = "snake";
-            snakeTail.style.gridRowStart = `${segment.y}`;
-            snakeTail.style.gridColumnStart = `${segment.x}`;
-            snakeTail.style.borderRadius = getTailRadius();
-            gameBoard.appendChild(snakeTail);
         }
         else {
             const snakeBody = document.createElement("div");
-            snakeBody.className = "snake";
+            snakeBody.className = "snake-body";
             snakeBody.style.gridRowStart = `${segment.y}`;
             snakeBody.style.gridColumnStart = `${segment.x}`;
             gameBoard.appendChild(snakeBody);
@@ -62,44 +53,4 @@ function addSegments() {
         snake.push(Object.assign({}, snake[snake.length - 1]));
     }
     newSegments = 0;
-}
-function getHeadRadius() {
-    const inputDirection = getInputDirection();
-    const key = "" + inputDirection.x + inputDirection.y;
-    let bRadiusHead = "";
-    switch (key) {
-        case "0-1":
-            bRadiusHead = "15px 15px 0px 0px";
-            break;
-        case "01":
-            bRadiusHead = "0px 0px 15px 15px";
-            break;
-        case "-10":
-            bRadiusHead = "15px 0px 0px 15px";
-            break;
-        case "10":
-            bRadiusHead = "0px 15px 15px 0px";
-            break;
-    }
-    return bRadiusHead;
-}
-function getTailRadius() {
-    const inputDirection = getInputDirection();
-    const key = "" + inputDirection.x + inputDirection.y;
-    let bRadiusTail = "";
-    switch (key) {
-        case "0-1":
-            bRadiusTail = "0px 0px 15px 15px";
-            break;
-        case "01":
-            bRadiusTail = "15px 15px 0px 0px";
-            break;
-        case "-10":
-            bRadiusTail = "0px 15px 15px 0px";
-            break;
-        case "10":
-            bRadiusTail = "15px 0px 0px 15px";
-            break;
-    }
-    return bRadiusTail;
 }

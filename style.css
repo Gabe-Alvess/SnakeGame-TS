@@ -49,8 +49,14 @@
   background-color: #255965;
 }
 
-.snake {
+.snake-head {
   background-color: #4ef037;
+  border-radius: 7px;
+}
+
+.snake-body {
+  background-color: #4ef037;
+  border-radius: 15px;
 }
 
 .food {
